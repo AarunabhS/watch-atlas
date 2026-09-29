@@ -1,0 +1,39 @@
+name: Publish Watch Atlas
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out dashboard
+        uses: actions/checkout@v6
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Validate prepared catalog
+        run: |
+          node --check dist/app.js
+          node --check dist/insights.js
+          node -e "const d = require('./dist/data.json'); if (d.insights.overall.count !== 1629 || d.inventory.length !== 73) throw new Error('Unexpected catalog or archive count');"
+      - name: Upload dashboard
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+      - name: Deploy dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
