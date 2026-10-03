@@ -29,7 +29,9 @@ jobs:
         run: |
           node --check dist/app.js
           node --check dist/insights.js
-          node -e "const d = require('./dist/data.json'); if (d.insights.overall.count !== 1629 || d.inventory.length !== 73) throw new Error('Unexpected catalog or archive count');"
+          node --check dist/catalog-model.js
+          node tools/validate_catalog.cjs
+          node --test tests/catalog.test.cjs
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v4
         with:

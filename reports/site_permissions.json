@@ -1,0 +1,116 @@
+{
+  "reviewed_at": "2026-10-02",
+  "purpose": "Bulk watch catalog collection and reuse on Watch Atlas",
+  "user_permission_status": "No watchmaker permission; collect only where permitted",
+  "brands": {
+    "breitling": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.breitling.com/us-en/terms-of-use/",
+      "sections": "3.1–3.2",
+      "reason": "Personal, non-commercial use only; public reproduction and display on another platform restricted.",
+      "direct_robots_status": 200,
+      "architecture": "Product paths and structured-data extraction are provisional; no live product validation.",
+      "robots_evidence": {
+        "url": "https://www.breitling.com/robots.txt",
+        "status": 200,
+        "sha256": "ee65af60b057b5530cc591292a0fe34873f649d7a62c4e2ecf6fd03a2ca97f7e",
+        "response_date": "Thu, 01 Oct 2026 20:16:45 GMT",
+        "file": "scraping_runs/site_audit/breitling/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    },
+    "patek": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.patek.com/en/legal-notices/terms-and-conditions",
+      "sections": "Website Terms and Conditions, section 1",
+      "reason": "Personal, non-commercial license; copying, downloading and republication require prior written consent beyond that license.",
+      "direct_robots_status": 200,
+      "architecture": "Homepage confirmed server-rendered Next.js/Sitecore JSON; product mapping still provisional.",
+      "robots_evidence": {
+        "url": "https://www.patek.com/robots.txt",
+        "status": 200,
+        "sha256": "56b97f2c46c267aa4a349ebf6d2c81a5be722d74df66a5bcbb12e7651648da2f",
+        "response_date": "Thu, 01 Oct 2026 20:16:46 GMT",
+        "file": "scraping_runs/site_audit/patek/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    },
+    "jaeger_lecoultre": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.jaeger-lecoultre.com/us-en/terms-of-use",
+      "sections": "Use of Materials on the Platforms (December 2025)",
+      "reason": "Personal/non-commercial copying license; public reuse and communication on another platform restricted. Direct robots request denied with HTTP 403.",
+      "direct_robots_status": 403,
+      "architecture": "Richemont adapter is provisional; access denied before catalog inspection.",
+      "robots_evidence": {
+        "url": "https://www.jaeger-lecoultre.com/robots.txt",
+        "status": 403,
+        "sha256": "a9c99d57d17a2d6414cffd263734e126dcb191dcf9cdf7cf9c34cfed3aaa74f5",
+        "response_date": "Thu, 01 Oct 2026 20:16:15 GMT",
+        "file": "scraping_runs/site_audit/jaeger_lecoultre/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    },
+    "omega": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.omegawatches.com/terms-of-use",
+      "sections": "4.1–4.2",
+      "reason": "License excludes data mining, robots and similar extraction; database incorporation and republication require written permission.",
+      "direct_robots_status": 200,
+      "architecture": "Product-path and specification adapter is provisional; no live product validation.",
+      "robots_evidence": {
+        "url": "https://www.omegawatches.com/robots.txt",
+        "status": 200,
+        "sha256": "7981af117aae3842cf2e67827fbd18d9429c76d5479430782c70b8bc97b5e6c8",
+        "response_date": "Thu, 01 Oct 2026 20:17:16 GMT",
+        "file": "scraping_runs/site_audit/omega/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    },
+    "tudor": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.tudorwatch.com/en/terms-of-use",
+      "sections": "TUDOR's Copyrights and Trademarks",
+      "reason": "Copying, downloading and redistribution restricted without written agreement; stated exception is non-commercial hard-copy printing.",
+      "direct_robots_status": 200,
+      "architecture": "Reference paths and labeled specification adapter are provisional; no live product validation.",
+      "robots_evidence": {
+        "url": "https://www.tudorwatch.com/robots.txt",
+        "status": 200,
+        "sha256": "c20dd05c793c68657812a5af32507460b6c8adae134e6db768e411931594e008",
+        "response_date": "Thu, 01 Oct 2026 20:16:16 GMT",
+        "file": "scraping_runs/site_audit/tudor/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    },
+    "iwc": {
+      "collection": "permission_required",
+      "reuse": "permission_required",
+      "terms_url": "https://www.iwc.com/us-en/terms-and-legal/terms-of-use",
+      "sections": "Sections 4 and 10 (August 2025)",
+      "reason": "Published terms require written approval for automated access/copying and restrict public reuse. Direct robots request denied with HTTP 403.",
+      "direct_robots_status": 403,
+      "architecture": "Richemont adapter is provisional; access denied before catalog inspection.",
+      "robots_evidence": {
+        "url": "https://www.iwc.com/robots.txt",
+        "status": 403,
+        "sha256": "01bfa267d1d809885ee81282580aa5043e2153e2881cd93ad7e91f1db9355016",
+        "response_date": "Thu, 01 Oct 2026 20:16:15 GMT",
+        "file": "scraping_runs/site_audit/iwc/robots.txt"
+      },
+      "collection_status": "permission_required",
+      "product_records_collected": 0
+    }
+  },
+  "report_created_at": "2026-10-01T20:46:42.235926+00:00"
+}

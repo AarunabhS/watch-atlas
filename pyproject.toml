@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watch-atlas-scraper"
+version = "0.1.0"
+description = "Permission-aware, resumable official watch catalog collector"
+requires-python = ">=3.11"
+dependencies = ["lxml>=5,<7"]
+
+[project.scripts]
+watch-atlas-scrape = "watch_atlas_scraper.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["watch_atlas_scraper*"]
+
+[tool.setuptools.package-data]
+watch_atlas_scraper = ["policies.json"]
