@@ -24,6 +24,7 @@ function segment(row){
 function stoneDetails(source,row){
  const evidenceFields=['dial_color','numerals','case_material','bezel_material','bracelet_material','clasp_type'];
  const values=evidenceFields.map(key=>[key,text(row[key])]);
+ for(const [key,value] of Object.entries(source.raw_specifications||{})){if(/gem|diamond|stone|setting/i.test(key))values.push([key,text(value)]);}
  if(source.gem_setting)values.push(['gem_setting',text(source.gem_setting)]);
  const patterns={Diamond:/\bdiamonds?\b|\bdiamants?\b/i,Ruby:/\brub(?:y|ies)\b(?![ -]?red)/i,Emerald:/\bemeralds?\b(?![ -]?green)/i,Sapphire:/\bsapphires?\b(?![ -]?(?:blue|crystal|glass))/i,Amethyst:/\bamethysts?\b/i,Tourmaline:/\btourmalines?\b/i,Rubellite:/\brubellites?\b/i,Peridot:/\bperidots?\b/i,Spinel:/\bspinels?\b/i,Tsavorite:/\btsavorites?\b/i};
  const stones=[],evidence=[];
@@ -46,7 +47,7 @@ function normalize(source,dataset){
  row.source_hash=source.source_hash;row.captured_at=source.captured_at;
  const captured=dateParts(source.captured_at);row.captured_date=captured.date;row.captured_label=captured.label;
  row.market=source.market;row.language=source.language;row.source_kind='Official catalog';
- row.watch_kind=source.subtype==='Pocketwatch'?'Pocket watch':'Wristwatch';row.is_watch=true;
+ row.watch_kind=source.subtype==='Pocketwatch'||/pocket/i.test(source.type||'')?'Pocket watch':'Wristwatch';row.is_watch=true;
  row.price_value=/^\d+(?:\.\d+)?$/.test(row.price)&&Number(row.price)>0?Number(row.price):null;
  row.price_status=source.price_status||'';row.price_tax_label=source.price_tax_label||'';
  const diameter=/^(\d+(?:[.,]\d+)?)\s*mm$/i.exec(row.diameter);
@@ -54,7 +55,7 @@ function normalize(source,dataset){
  row.diameter_source=diameter?'Case diameter field':'';
  row.diameter_note=text(source.case_dimensions_display);
  row.diameter_metric_eligible=row.watch_kind!=='Pocket watch'&&row.diameter_mm!==null&&!/diagonal/i.test(row.diameter_note);
- row.collection_label=text(source.catalog_collection||row.parent_model)||'Other';
+ row.collection_label=text(source.catalog_collection||source.collection_label||row.parent_model)||'Other';
  row.movement_family=movementFamily(row);row.movement_source=row.movement?'Movement field':'';
  row.caliber_key=row.caliber.replace(/\((?:manufacture|automatic|manual|self-winding)\)/gi,'').replace(/\s+/g,' ').trim().toUpperCase();
  row.segment=segment(row);Object.assign(row,stoneDetails(source,row));
@@ -64,6 +65,9 @@ function normalize(source,dataset){
  if(source.headWeight)row.extra_specs.push({label:'Watch-head weight',value:text(source.headWeight)+' g'});
  if(source.warrantyDuration)row.extra_specs.push({label:'Manufacturer warranty',value:text(source.warrantyDuration)+' years'});
  if(typeof source.limited_edition==='boolean')row.extra_specs.push({label:'Limited edition',value:source.limited_edition?'Yes':'No'});
+ for(const extra of source.additional_specifications||[]){if(extra.label&&text(extra.value)&&!row.extra_specs.some(x=>x.label===extra.label&&x.value===text(extra.value)))row.extra_specs.push({label:extra.label,value:text(extra.value)});}
+ for(const [key,value] of Object.entries(source.raw_specifications||{})){if(/^(?:battery_type|strap_surface|strap_underside|watch_size)$/.test(key)&&text(value))row.extra_specs.push({label:key.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),value:text(value)});}
+ for(const difference of source.source_discrepancies||[]){if(!('accordion' in difference)||!('caliber_block' in difference))continue;row.extra_specs.push({label:'Source difference: '+difference.field,value:'Technical accordion: '+difference.accordion+'; separate calibre block: '+difference.caliber_block});}
  row.image_urls=source.image_urls||[row.image_url];
  return row;
 }

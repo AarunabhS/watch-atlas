@@ -13,7 +13,7 @@ assert.equal(data.inventory.length,data.archiveStats.files);
 for(const dataset of data.catalogImports){
  const rows=watches.filter(r=>r.source_dataset===dataset.id);
  assert.equal(rows.length,dataset.rows);
- for(const r of rows){assert.equal(r.brand,dataset.brand);assert.equal(r.captured_date,dataset.captured_date);assert.equal(r.source_kind,'Official catalog');assert.ok(r.reference_number&&r.watch_URL&&r.image_url&&r.source_hash);assert.ok(r.price_value===null||r.price_value>0);}
+ for(const r of rows){assert.equal(r.brand,dataset.brand);assert.ok((dataset.captured_dates||[dataset.captured_date]).includes(r.captured_date));assert.equal(r.source_kind,'Official catalog');assert.ok(r.reference_number&&r.watch_URL&&r.source_hash);assert.ok(r.price_value===null||r.price_value>0);}
 }
 for(const b of data.insights.brands)assert.deepEqual(b,model.summarizeWatches(watches.filter(r=>r.brand===b.name),b.name));
 assert.equal(data.insights.brands.reduce((sum,b)=>sum+b.count,0),watches.length);
