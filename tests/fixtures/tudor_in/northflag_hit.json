@@ -1,0 +1,190 @@
+{
+  "name": {
+    "en": "TUDOR Northflag"
+  },
+  "rmc": "m9140g1a0u-0001",
+  "cleanRmc": "m9140g1a0u-0001",
+  "reference": "9140G1A0U",
+  "family": {
+    "en": "tudor-northflag|TUDOR Northflag"
+  },
+  "watchNameSubtitle": {
+    "en": ""
+  },
+  "lineName": "northflag",
+  "theme": "sport",
+  "modelTheme": "",
+  "familySlug": "tudor-northflag",
+  "excludedFromCollectionGrid": false,
+  "thematic": {
+    "en": [
+      "thematic-category-adventure|Adventure",
+      "thematic-category-master-chronometer|Master Chronometer",
+      "thematic-category-sport|Sport"
+    ]
+  },
+  "new": true,
+  "optionalCalibre": true,
+  "options": [
+    "filter_item_is_new_watch_true",
+    "filter_item_is_metas_watch_true",
+    "filter_item_has_manufacture_movement_true"
+  ],
+  "metas": true,
+  "caseSpec": {
+    "en": "40mm stainless steel case with satin-brushed and polished finishes<br>Open case back with domed sapphire crystal"
+  },
+  "movementSpec": {
+    "en": "Manufacture Calibre MT5652-U (COSC and METAS certified)<br>Self-winding mechanical movement with bidirectional rotor system<br>Integrated GMT function"
+  },
+  "powerReserveSpec": {
+    "en": "65-hour power reserve"
+  },
+  "windingCrownSpec": {
+    "en": "Stainless steel screw-down cone-shaped winding crown with the TUDOR shield in relief"
+  },
+  "waterproofnessSpec": {
+    "en": "Waterproof to 100m (330 ft)"
+  },
+  "bezelSpec": {
+    "en": "Fixed stainless steel bezel with satin-brushed and polished finishes"
+  },
+  "dialSpec": {
+    "en": "Black dial with 24-hour graduated rehaut<br>Date at 3 o'clock<br>\"Northflag\" hands and hour markers with Swiss Super-LumiNova® luminescent material"
+  },
+  "crystalSpec": {
+    "en": "Domed sapphire crystal"
+  },
+  "braceletSpec": {
+    "en": "2-link integrated bracelet in stainless steel, satin-brushed and polished finishes, with TUDOR \"T-fit\" rapid adjustment clasp"
+  },
+  "additionalBraceletSpec": {
+    "en": ""
+  },
+  "lugToLugSpec": "12",
+  "caseThicknessSpec": "12.7",
+  "miniSpecs": {
+    "featured": [
+      {
+        "en": "40mm steel case"
+      },
+      {
+        "en": "Black dial"
+      }
+    ],
+    "presented": [
+      {
+        "en": "Manufacture Calibre MT5652-U"
+      },
+      {
+        "en": "40mm steel case"
+      },
+      {
+        "en": "Black dial"
+      }
+    ]
+  },
+  "filters": {
+    "Function": {
+      "en": [
+        "filter-function-date-fn|Date",
+        "filter-function-gmt-fn|GMT"
+      ]
+    },
+    "Bezel": {
+      "en": [
+        "filter-bezel-smooth-bl|Smooth"
+      ]
+    },
+    "Colour": {
+      "en": [
+        "filter-dial-colour-black-cr|Black"
+      ]
+    },
+    "Size": {
+      "en": [
+        "filter-size-large-se|Large"
+      ]
+    },
+    "Dial": {
+      "en": [
+        "filter-dial-tint-dark-dl|Dark"
+      ]
+    },
+    "Bracelet": {
+      "en": [
+        "filter-bracelet-steel-include-goldeneggpplacor-bt|Steel"
+      ]
+    },
+    "Material": {
+      "en": [
+        "filter-material-steel-ml|Steel"
+      ]
+    },
+    "Diameter": {
+      "en": [
+        "40-dr|40"
+      ]
+    }
+  },
+  "certification": {
+    "title": {
+      "en": "METAS Master Chronometer certification is comprehensive and covers the main functional characteristics of a watch including precision, resistance to magnetic fields, waterproofness and power reserve. Its standards are incredibly high, starting with precision."
+    },
+    "swiss-made": {
+      "en": "Two prerequisites are necessary for obtaining the certification: Swiss manufacturing must conform to Swiss Made criteria, and the movement must be certified by the Official Swiss Chronometer Testing Institute (COSC)."
+    },
+    "precision": {
+      "en": "Certification by the Swiss Official Chronometer Testing Institute (COSC)<br>Precision at two temperatures, in six different positions and at two different levels of power reserve: 100% and 33%"
+    },
+    "waterproofness": {
+      "en": "Waterproof to 100m (330 ft) in accordance with ISO standard"
+    },
+    "anti-magnetism": {
+      "en": "Smooth functioning when exposed to a magnetic field of 15,000 gauss and precision following exposure"
+    },
+    "power-reserve": {
+      "en": "65-hour power reserve"
+    }
+  },
+  "order": 0,
+  "nameSlug": "tudor-northflag",
+  "suggestions": [
+    "m2639w1a0u-0001",
+    "m79950-0001",
+    "m79660-0001"
+  ],
+  "zoneGlobalSuggestions": [
+    "m2639w1a0u-0001",
+    "m79950-0001",
+    "m79660-0001"
+  ],
+  "zoneASuggestions": [
+    "m2639w1a0u-0001",
+    "m79950-0001",
+    "m79660-0001"
+  ],
+  "variations": [],
+  "additionalBracelet": "",
+  "boutiqueOnly": true,
+  "createdTimestamp": 1788220800,
+  "deletedTimestamp": 0,
+  "zoneGlobal": 1,
+  "zoneA": 1,
+  "zoneGlobalEdito": 1,
+  "zoneAEdito": 1,
+  "zoneBEdito": 1,
+  "type": "watch",
+  "image": "https://media.tudorwatch.com/image/upload/v1/catalogue/0yi5ee8b69yh3/upright-cb-with-drop-shadow/tudor-m9140g1a0u-0001.png",
+  "nb_words": 0,
+  "allPrices": {
+    "IN": {
+      "rawPrice": 511000,
+      "formattedPrice": "₹5,11,000"
+    }
+  },
+  "availability": [
+    "FR"
+  ],
+  "objectID": "m9140g1a0u-0001"
+}

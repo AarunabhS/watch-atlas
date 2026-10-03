@@ -1,0 +1,43 @@
+{
+  "reference": "IW590503",
+  "url": "https://www.iwc.com/us-en/watches/pilot-watches/iw590503-big-pilots-watch-constant-force-tourbillon",
+  "collection": "Pilot’s Watches",
+  "name": "Big Pilot’s Watch Constant Force Tourbillon",
+  "listing_price": "",
+  "listing_currency": "",
+  "raw_tracking": {
+    "item_id": "IW590503",
+    "item_name": "Big Pilot’s Watch Constant Force Tourbillon",
+    "item_brand": "iwc",
+    "item_category": "Watches",
+    "item_collection": "SKU Pilot’s Watches",
+    "item_material_case": "Armor Gold 5N",
+    "item_sellable": "sellable",
+    "item_stock": false,
+    "currency": "",
+    "price": "",
+    "item_variant": "",
+    "item_line": ""
+  },
+  "raw_listing_fields": {
+    "class": "phxsg-product-card product-card hidden mixed-grid__item",
+    "data-cy": "mixed-grid-item",
+    "collection": "SKU Pilot’s Watches",
+    "product_property_ids": "3,4,5,6,7,11,12,13,14,15,35,41,55,64,66,73,92,94,108,120,157,166,172,205,206,207,230,261,290,327,406,408,409,412,423,479,516,collection-33,type-watches",
+    "should_display_prices": "true",
+    "iswatches": "true",
+    "publication_date": "2026-03-31 12:20:21",
+    "price_position": "9223372036854776000",
+    "price_position_desc": "9223372036854776000",
+    "itemid": "mixed-grid-product-IW590503",
+    "template": "product",
+    "data-cy-item": "product"
+  },
+  "listing_images": [
+    "https://img.iwc.com/product-card-mixed-grid-1/9a11fb2563eb20a7e40a902476d2999de1966db5.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/41f0ee46a27a945ad0e6613804df636f543118d1.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/7b8cebb0e4576019408893470354986f2260727e.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/e82e53d1ba168eced4f9634c5d6063514a285d5f.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/2a7d08c011c051f73c36233f8e62ad9ab8643960.jpg"
+  ]
+}

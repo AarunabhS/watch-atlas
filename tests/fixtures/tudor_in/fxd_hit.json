@@ -1,0 +1,175 @@
+{
+  "name": {
+    "en": "Pelagos FXD"
+  },
+  "rmc": "m25717n-0001",
+  "cleanRmc": "m25717n-0001",
+  "reference": "25717N",
+  "family": {
+    "en": "pelagos-fxd|Pelagos FXD"
+  },
+  "lineName": "pelagos",
+  "theme": "sport",
+  "familySlug": "pelagos-fxd",
+  "thematic": {
+    "en": [
+      "thematic-category-adventure|Adventure",
+      "thematic-category-diving|Diving",
+      "thematic-category-men|Men's",
+      "thematic-category-pelagos|Pelagos"
+    ]
+  },
+  "new": false,
+  "optionalCalibre": true,
+  "options": [
+    "filter_item_has_manufacture_movement_true"
+  ],
+  "metas": false,
+  "caseSpec": {
+    "en": "Titanium case, 42mm in diameter, 12.75mm thick, 52mm from lug to lug, satin-brushed finish<br>Fixed bracelet bars<br>Steel case back"
+  },
+  "movementSpec": {
+    "en": "Manufacture Calibre MT5602 (COSC)<br>Self-winding mechanical movement with bidirectional rotor system"
+  },
+  "powerReserveSpec": {
+    "en": "Power reserve of approximately 70 hours"
+  },
+  "windingCrownSpec": {
+    "en": "Titanium crown, adorned with the TUDOR shield in relief"
+  },
+  "waterproofnessSpec": {
+    "en": "Waterproof to 200m (660 ft)"
+  },
+  "bezelSpec": {
+    "en": "Unidirectional rotating bezel in titanium with ceramic disc, 60-minute graduation"
+  },
+  "dialSpec": {
+    "en": "Matte black"
+  },
+  "crystalSpec": {
+    "en": "Sapphire crystal"
+  },
+  "braceletSpec": {
+    "en": "Forest green with red central thread, equipped with a self-gripping fastening system"
+  },
+  "additionalBraceletSpec": {
+    "en": "Complimentary black rubber strap with woven motif and titanium pin buckle, included in the box"
+  },
+  "miniSpecs": {
+    "featured": [
+      {
+        "en": "42mm titanium case"
+      },
+      {
+        "en": "Green fabric strap with red band"
+      },
+      {
+        "en": "Black rubber strap"
+      }
+    ],
+    "presented": [
+      {
+        "en": "Manufacture Calibre MT5602"
+      },
+      {
+        "en": "42mm titanium case"
+      },
+      {
+        "en": "Green fabric strap with red band"
+      }
+    ]
+  },
+  "filters": {
+    "Function": {
+      "en": [
+        "filter-function-no-date-fn|No date"
+      ]
+    },
+    "Bezel": {
+      "en": [
+        "filter-bezel-rotatable-bl|Rotatable"
+      ]
+    },
+    "Colour": {
+      "en": [
+        "filter-dial-colour-black-cr|Black"
+      ]
+    },
+    "Size": {
+      "en": [
+        "filter-size-large-se|Large"
+      ]
+    },
+    "Dial": {
+      "en": [
+        "filter-dial-tint-dark-dl|Dark"
+      ]
+    },
+    "Bracelet": {
+      "en": [
+        "filter-bracelet-textile-bt|Fabric"
+      ]
+    },
+    "Material": {
+      "en": [
+        "filter-material-titanium-ml|Titanium"
+      ]
+    },
+    "Diameter": {
+      "en": [
+        "42-dr|42"
+      ]
+    }
+  },
+  "certification": {},
+  "order": 74,
+  "nameSlug": "pelagos-fxd",
+  "suggestions": [
+    "m79000n-0001",
+    "m25600tn-0001"
+  ],
+  "variations": [
+    "m25827kn-0001",
+    "m2542gxx7nu-0002",
+    "m25707b-0001"
+  ],
+  "additionalBracelet": "m25717n-0001-ab__black_rubber__4502337",
+  "createdTimestamp": 1693526400,
+  "deletedTimestamp": 0,
+  "zoneGlobal": 1,
+  "zoneA": 1,
+  "zoneGlobalEdito": 1,
+  "zoneAEdito": 1,
+  "zoneBEdito": 1,
+  "type": "watch",
+  "image": "https://media.tudorwatch.com/image/upload/v1/catalogue/0yi5ee8b69yh3/upright-cb-with-drop-shadow/tudor-m25717n-0001.png",
+  "allPrices": {
+    "IN": {
+      "rawPrice": 465600,
+      "formattedPrice": "₹4,65,600"
+    }
+  },
+  "lugToLugSpec": "22",
+  "caseThicknessSpec": "12.8",
+  "nb_words": 0,
+  "zoneGlobalSuggestions": [
+    "m79000n-0001",
+    "m25600tn-0001"
+  ],
+  "zoneASuggestions": [
+    "m79000n-0001",
+    "m25600tn-0001"
+  ],
+  "boutiqueOnly": false,
+  "modelTheme": "sport",
+  "watchNameSubtitle": {
+    "en": ""
+  },
+  "excludedFromCollectionGrid": false,
+  "availability": [
+    "CA",
+    "CH",
+    "FR"
+  ],
+  "objectID": "m25717n-0001"
+}

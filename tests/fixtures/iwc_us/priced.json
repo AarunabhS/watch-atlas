@@ -1,0 +1,44 @@
+{
+  "reference": "IW388121",
+  "url": "https://www.iwc.com/us-en/watches/pilot-watches/iw388121-pilots-watch-chronograph-41-mercedes-amg-petronas-formula-one-team",
+  "collection": "Pilot’s Watches",
+  "name": "Pilot's Watch Chronograph 41 Mercedes-AMG PETRONAS Formula One™ Team",
+  "listing_price": "9,200",
+  "listing_currency": "US$",
+  "raw_tracking": {
+    "item_id": "IW388121",
+    "item_name": "Pilot's Watch Chronograph 41 Mercedes-AMG PETRONAS Formula One™ Team",
+    "item_brand": "iwc",
+    "item_category": "Watches",
+    "item_collection": "SKU Pilot’s Watches",
+    "item_material_case": "Titanium",
+    "item_sellable": "sellable",
+    "item_stock": false,
+    "currency": "USD",
+    "price": "9200.00",
+    "item_variant": "",
+    "item_line": ""
+  },
+  "raw_listing_fields": {
+    "class": "phxsg-product-card product-card block mixed-grid__item phxsg-fade-in phxsg-is-revealed",
+    "data-cy": "mixed-grid-item",
+    "collection": "SKU Pilot’s Watches",
+    "product_property_ids": "3,4,5,6,7,10,11,12,13,14,15,34,35,47,48,55,67,78,166,178,185,205,206,207,217,408,409,412,417,479,481,506,514,678,679,collection-33,type-watches",
+    "should_display_prices": "true",
+    "iswatches": "true",
+    "publication_date": "2026-07-27 08:10:33",
+    "price_position": "27",
+    "price_position_desc": "28",
+    "itemid": "mixed-grid-product-IW388121",
+    "template": "product",
+    "data-cy-item": "product",
+    "style": "--delay-dynamic: 0.05s;"
+  },
+  "listing_images": [
+    "https://img.iwc.com/product-card-mixed-grid-1/1f62bb1c2a909dd84e9f453f023e39b83240770e.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/dd2f45603d71b5a94d80a680b8505cf2688f0845.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/761e0d18758ceda0446babce1665cf27b7cb6d0d.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/9734354853989df02b5ba0e7b49aacf4e1138a7f.jpg",
+    "https://img.iwc.com/product-card-mixed-grid-1/3e06887b399c516f0b8b8052becfadb0fce45068.jpg"
+  ]
+}
