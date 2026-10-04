@@ -14,6 +14,7 @@ function movementFamily(row){
 }
 function segment(row){
  const selected=[row.specific_model,row.marketing_name,row.features].join(' ');
+ if(row.brand==='Breguet'&&/phase de lune|quanti[èe]me|r[ée]trograde|r[ée]p[ée]tition minutes|grande sonnerie|[ée]quation marchante|hora mundi/i.test(selected))return 'Complications';
  if(/perpetual|annual calendar|tourbillon|repeater|sonnerie|moon.?phase|split.?seconds|rattrapante|world time|alarm|retrograde|power reserve (?:display|indicator)/i.test(selected))return 'Complications';
  if(/chronograph|chronographe|\bchrono\b/i.test(selected))return 'Chronograph';
  if(/superocean|submariner|sea.?dweller|aquatimer|pelagos|diving|diver/i.test(selected+' '+row.parent_model))return 'Diving';
@@ -84,7 +85,7 @@ function summarizeWatches(rows,name){
 }
 function curatedOrder(rows,order=[]){
  const names=[...new Set([...order,...rows.map(r=>r.brand)])];
- const groups=names.map(name=>rows.filter(r=>r.brand===name));
+ const groups=names.map(name=>rows.filter(r=>r.brand===name).sort((a,b)=>Number(a.verification_status==='unverified')-Number(b.verification_status==='unverified')));
  const result=[];for(let i=0;i<Math.max(0,...groups.map(g=>g.length));i++)for(const group of groups)if(group[i])result.push(group[i]);
  return result;
 }
@@ -92,6 +93,12 @@ function snapshotLabel(rows){
  const labels=[...new Set(rows.map(r=>r.captured_label||'2023–2024 archive'))];
  return labels.length===1?labels[0]:'Archive + October 2026 catalogs';
 }
-const api={categories,columns,coreFields,normalize,summarizeWatches,curatedOrder,snapshotLabel};
+function matchesSearch(row,query){
+ const q=text(query).toLowerCase();if(!q)return true;
+ if(['brand','reference_number','specific_model','parent_model','collection_label','case_material','caliber','dial_color'].some(k=>text(row[k]).toLowerCase().includes(q)))return true;
+ const compact=q.replace(/[^a-z0-9]/g,'');
+ return compact.length>=3&&/\d/.test(compact)&&text(row.reference_number).toLowerCase().replace(/[^a-z0-9]/g,'').includes(compact);
+}
+const api={categories,columns,coreFields,normalize,summarizeWatches,curatedOrder,snapshotLabel,matchesSearch};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.AtlasModel=api;
 })(globalThis);

@@ -10,7 +10,7 @@ The owner chose Serper + Cloudflare and will connect those accounts.
 - **Compare watches** is available in the navigation, home page, catalog cards
   and watch details. Shortlist up to six watches. Selections, parameters and
   requirements survive reloads in this browser's local storage.
-- Choose from **88 parameters in the current catalog**, including 41 shared
+- Choose from **117 parameters in the current catalog**, including 41 shared
   fields and 47 additional published details. New extra specifications become
   selectable automatically when catalog data changes.
 - Combine up to twelve requirements. Numeric conditions support minimum,
@@ -38,7 +38,7 @@ The owner chose Serper + Cloudflare and will connect those accounts.
 ## Backend and latency
 
 The Cloudflare Worker exposes `GET /v1/price?id=<catalog-id>&country=us`.
-`backend/catalog.mjs` is an allowlist of 1,529 eligible identities generated from
+`backend/catalog.mjs` is an allowlist of 1,792 eligible identities generated from
 the 1,530 watches without numeric prices; one lacks a usable reference. Clients
 cannot supply an arbitrary query, brand, reference or upstream URL. The worker
 constructs an exact-reference Google query through Serper's search endpoint.

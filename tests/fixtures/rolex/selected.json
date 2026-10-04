@@ -1,0 +1,125 @@
+{
+  "reference": "126234-0051",
+  "requested_url": "https://www.rolex.com/watches/datejust/m126234-0051",
+  "checked_at": "2026-10-04T08:46:56.926Z",
+  "representation": "selected_rendered_dom",
+  "status": "matched_product",
+  "canonical": "https://www.rolex.com/watches/datejust/m126234-0051",
+  "error_text": "",
+  "fields": [
+    {
+      "label": "Model case",
+      "section": "Model case",
+      "value": "Oyster, 36 mm, Oystersteel and white gold"
+    },
+    {
+      "label": "Oyster architecture",
+      "section": "Model case",
+      "value": "Monobloc middle case, screw-down case back and winding crown"
+    },
+    {
+      "label": "Diameter",
+      "section": "Model case",
+      "value": "36 mm"
+    },
+    {
+      "label": "Material",
+      "section": "Model case",
+      "value": "White Rolesor - combination of Oystersteel and white gold"
+    },
+    {
+      "label": "Bezel",
+      "section": "Model case",
+      "value": "Fluted"
+    },
+    {
+      "label": "Winding crown",
+      "section": "Model case",
+      "value": "Screw-down, Twinlock double waterproofness system"
+    },
+    {
+      "label": "Crystal",
+      "section": "Model case",
+      "value": "Scratch-resistant sapphire, Cyclops lens over the date"
+    },
+    {
+      "label": "Water resistance",
+      "section": "Model case",
+      "value": "Waterproof to 100 metres / 330 feet"
+    },
+    {
+      "label": "Movement",
+      "section": "Movement",
+      "value": "Perpetual, mechanical, self-winding"
+    },
+    {
+      "label": "Calibre",
+      "section": "Movement",
+      "value": "3235, Manufacture Rolex"
+    },
+    {
+      "label": "Precision",
+      "section": "Movement",
+      "value": "-2/+2 sec/day, after casing"
+    },
+    {
+      "label": "Functions",
+      "section": "Movement",
+      "value": "Centre hour, minute and seconds hands. Instantaneous date with rapid setting. Stop-seconds for precise time setting"
+    },
+    {
+      "label": "Oscillator",
+      "section": "Movement",
+      "value": "Paramagnetic blue Parachrom hairspring. High-performance Paraflex shock absorbers"
+    },
+    {
+      "label": "Winding",
+      "section": "Movement",
+      "value": "Bidirectional self-winding via Perpetual rotor"
+    },
+    {
+      "label": "Power reserve",
+      "section": "Movement",
+      "value": "Approximately 70 hours"
+    },
+    {
+      "label": "Bracelet",
+      "section": "Bracelet",
+      "value": "Jubilee, five-piece links"
+    },
+    {
+      "label": "Material",
+      "section": "Bracelet",
+      "value": "Oystersteel"
+    },
+    {
+      "label": "Clasp",
+      "section": "Bracelet",
+      "value": "Folding Oysterclasp with Easylink 5 mm comfort extension link"
+    },
+    {
+      "label": "Dial",
+      "section": "Dial",
+      "value": "Mint green"
+    },
+    {
+      "label": "Details",
+      "section": "Dial",
+      "value": "Highly legible Chromalight display with long-lasting blue luminescence"
+    },
+    {
+      "label": "Certification",
+      "section": "Certification",
+      "value": "Superlative Chronometer (official chronometer certification + Rolex certification after casing)"
+    }
+  ],
+  "heading": "Datejust 36Oyster, 36 mm, Oystersteel and white goldReference 126234",
+  "image": {
+    "alt": "Datejust 36, Oyster, 36 mm, Oystersteel and white gold, Dial : Mint green, Rolex",
+    "current_url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7-cover-majesty-landscape/c_limit,w_1200/v1/a677b2c664f6/catalogue/2026/upright-c/m126234-0051",
+    "loaded": true,
+    "url": "https://media.rolex.com/image/upload/q_auto/f_auto/t_v7-cover-majesty-landscape/c_limit,w_1920/v1/a677b2c664f6/catalogue/2026/upright-c/m126234-0051"
+  },
+  "title": "Rolex Datejust 36 watch: Oystersteel and white gold - m126234-0051",
+  "source_hash": "fixture"
+}

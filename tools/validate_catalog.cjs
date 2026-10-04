@@ -17,5 +17,5 @@ for(const dataset of data.catalogImports){
 }
 for(const b of data.insights.brands)assert.deepEqual(b,model.summarizeWatches(watches.filter(r=>r.brand===b.name),b.name));
 assert.equal(data.insights.brands.reduce((sum,b)=>sum+b.count,0),watches.length);
-assert.equal(data.records.filter(r=>!r.source_dataset).length,data.archiveStats.records);
+assert.equal(data.records.filter(r=>!r.source_dataset||r.archive_record_id).length,data.archiveStats.records,'archive record identities were lost during refresh');
 console.log(`Validated ${watches.length} watches, ${data.stats.preparedBrands} watchmakers, ${data.inventory.length} archived files`);
