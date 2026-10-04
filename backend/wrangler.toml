@@ -15,3 +15,6 @@ simple = { limit = 6, period = 60 }
 name = "SEARCH_BUDGET"
 namespace_id = "31002"
 simple = { limit = 30, period = 60 }
+
+# Universal Watch Finder uses WATCHES_D1. Add a d1_databases binding with the
+# actual database ID before activating it; see docs/universal-watch-finder.md.

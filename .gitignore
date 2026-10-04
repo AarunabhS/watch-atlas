@@ -14,3 +14,4 @@ permissions.local.json
 .env
 .env.*
 .wrangler/
+.finder/

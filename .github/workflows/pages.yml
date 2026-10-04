@@ -23,6 +23,9 @@ jobs:
     steps:
       - name: Check out dashboard
         uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Validate prepared catalog
@@ -34,6 +37,10 @@ jobs:
           node --check dist/comparison.js
           node --check dist/price-lookup.js
           node --check backend/price-service.mjs
+          node --check backend/finder-service.mjs
+          node --check dist/finder-model.js
+          node --check dist/finder.js
+          node tools/build-finder-catalog.mjs
           node tools/validate_catalog.cjs
           node --test tests/*.test.cjs tests/*.test.mjs
       - name: Upload dashboard

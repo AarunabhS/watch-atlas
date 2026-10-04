@@ -94,4 +94,4 @@ function main(){
  const destination=path.join(root,'dist/data.json');fs.writeFileSync(destination+'.tmp',JSON.stringify(current));fs.renameSync(destination+'.tmp',destination);
  console.log(JSON.stringify({...report,historical_unverified:report.historical_unverified.length},null,2));
 }
-if(require.main===module)main();else module.exports={mergeRecords,historical,summaries};
+if(require.main===module){main();const result=require('node:child_process').spawnSync(process.execPath,[path.join(root,'tools/build-finder-catalog.mjs')],{stdio:'inherit'});if(result.status!==0)throw new Error('Refresh applied; rebuild the derived Finder index before publishing.');}else module.exports={mergeRecords,historical,summaries};

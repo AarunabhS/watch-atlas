@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="refinement.css">
   <link rel="stylesheet" href="comparison.css?v=20261005">
+  <link rel="stylesheet" href="finder.css?v=20261005">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -16,6 +17,7 @@
   <div class="nav-label">EXPLORE</div>
   <nav aria-label="Main navigation">
     <button data-view="overview" class="nav-button active"><span aria-hidden="true">◫</span> Overview</button>
+    <button data-view="finder" class="nav-button"><span aria-hidden="true">⌕</span> Watch Finder</button>
     <button data-view="catalog" class="nav-button"><span aria-hidden="true">▦</span> Watch catalog <small id="nav-count"></small></button>
     <button data-view="compare" class="nav-button"><span aria-hidden="true">⇄</span> Compare watches <small id="compare-count"></small></button>
     <button data-view="insights" class="nav-button"><span aria-hidden="true">◌</span> Collection insights</button>
@@ -27,18 +29,20 @@
   <div class="author"><div class="avatar">AS</div><div><strong>Arunabho Kanti Som</strong><small>Curated watch research</small></div></div>
 </aside>
 <div class="workspace">
-  <header class="topbar"><span>WATCH ATLAS / <strong id="current-view">OVERVIEW</strong></span><span class="snapshot">COLLECTION EDITION <b>2023–2024 / 2026</b></span></header>
+  <header class="topbar"><span>WATCH ATLAS / <strong id="current-view">OVERVIEW</strong></span><form id="universal-search" class="universal-search" role="search"><label for="universal-query" class="skip-label">Universal watch search</label><input id="universal-query" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="universal-suggestions" autocomplete="off" placeholder="Search a watch, reference, or requirement…"><button aria-label="Search watches">⌕</button><div id="universal-suggestions" class="universal-suggestions" role="listbox" aria-label="Watch search suggestions" hidden></div></form></header>
   <main id="main" tabindex="-1"><div class="loading" role="status">Opening the collection…</div></main>
   <footer><span>WATCH ATLAS <span class="muted">/ A project by Arunabho Kanti Som</span></span><span>Archive + October 2026 catalogs</span></footer>
 </div>
 <dialog id="detail" aria-labelledby="detail-title"><button class="close" aria-label="Close watch details">×</button><div id="detail-content"></div></dialog>
 <div id="compare-tray" class="compare-tray" aria-label="Watch shortlist" hidden></div>
 <div id="atlas-status" class="atlas-status" role="status" aria-live="polite"></div>
-<script src="config.js?v=20261005" defer></script>
+<script src="config.js?v=20261005-finder" defer></script>
 <script src="catalog-model.js" defer></script>
 <script src="comparison-model.js?v=20261005" defer></script>
 <script src="price-lookup.js?v=20261005" defer></script>
-<script src="comparison.js?v=20261005" defer></script>
+<script src="comparison.js?v=20261005-finder" defer></script>
 <script src="insights.js" defer></script>
-<script src="app.js?v=20261005-rolex-breguet" defer></script>
+<script src="finder-model.js?v=20261005" defer></script>
+<script src="finder.js?v=20261005" defer></script>
+<script src="app.js?v=20261005-finder" defer></script>
 </body></html>

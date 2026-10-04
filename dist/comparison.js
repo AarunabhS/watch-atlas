@@ -4,19 +4,23 @@ const M=root.AtlasCompare,escape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&
 const safe=u=>{try{const x=new URL(u);return x.protocol==='https:'?x.href:'';}catch{return '';}};
 const labels={lte:'At most',gte:'At least',eq:'Exactly',between:'Between',contains:'Contains',equals:'Equals',excludes:'Does not contain',known:'Must be recorded'};
 const storageKey='watch-atlas-comparison-v1',maxWatches=6;
+let partial=false,trayExpanded=false;
 let rows=[],index=new Map(),fields=[],ids=[],selected=[...M.defaults],rules=[],unknown=false,differences=false,hideEmpty=false,query='',shown=12,callbacks={},toastTimer;
 const $=s=>document.querySelector(s);
 function notify(text){const el=$('#atlas-status');if(el){el.textContent=text;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{el.textContent='';},4500);}}
-function persist(){try{localStorage.setItem(storageKey,JSON.stringify({ids,selected,rules,unknown,differences,hideEmpty}));}catch{}refreshSelection();}
+function persist(){try{localStorage.setItem(storageKey,JSON.stringify({ids,selected,rules,unknown,differences,hideEmpty}));}catch{}try{localStorage.setItem(storageKey+'-rows',JSON.stringify(ids.map(id=>index.get(id)).filter(Boolean)));}catch{}refreshSelection();}
 function sanitize(value){
  const v=value&&typeof value==='object'?value:{};
- ids=[...new Set(Array.isArray(v.ids)?v.ids:[])].filter(id=>index.has(id)).slice(0,maxWatches);
+ ids=[...new Set(Array.isArray(v.ids)?v.ids:[])].filter(id=>typeof id==='string'&&id.length<=100&&(partial||index.has(id))).slice(0,maxWatches);
  selected=[...new Set(Array.isArray(v.selected)?v.selected:M.defaults)].filter(id=>fields.some(f=>f.id===id));
  rules=(Array.isArray(v.rules)?v.rules:[]).slice(0,12).filter(r=>r&&fields.some(f=>f.id===r.field)&&typeof r.value==='string'&&r.value.length<=200).map(r=>({field:r.field,op:M.operators(fields.find(f=>f.id===r.field)).includes(r.op)?r.op:'known',value:r.value,value2:String(r.value2||'').slice(0,30),currency:/^[A-Z]{3}$/.test(r.currency||'')?r.currency:'USD'}));
  unknown=v.unknown===true;differences=v.differences===true;hideEmpty=v.hideEmpty===true;
 }
 function initialize(data){
- rows=root.AtlasModel.curatedOrder(data.records.filter(r=>r.is_watch),data.brandOrder||[]);index=new Map(rows.map(r=>[r.id,r]));fields=M.allFields(rows);
+ partial=data.partial===true;
+ let cached=[];try{cached=JSON.parse(localStorage.getItem(storageKey+'-rows')||'[]').slice(0,maxWatches);}catch{}
+ if(partial)for(const row of cached)if(row?.is_watch&&!data.records.some(r=>r.id===row.id))data.records.push(row);
+ rows=root.AtlasModel.curatedOrder(data.records.filter(r=>r.is_watch),data.brandOrder||[]);index=new Map(rows.map(r=>[r.id,r]));fields=M.allFields([...rows,...(data.comparisonExtraLabels||[]).map(label=>({extra_specs:[{label,value:''}]}))]);
  try{sanitize(JSON.parse(localStorage.getItem(storageKey)||'{}'));}catch{sanitize({});}
  if(location.hash.startsWith('#compare?')){
   try{const p=new URLSearchParams(location.hash.split('?')[1]);if(location.hash.length<14000)sanitize({ids:(p.get('ids')||'').split(','),selected:p.has('fields')?JSON.parse(p.get('fields')):M.defaults,rules:JSON.parse(p.get('rules')||'[]'),unknown:p.get('unknown')==='1',differences:p.get('diff')==='1',hideEmpty:p.get('hide')==='1'});persist();}catch{notify('This comparison link could not be read. Your saved shortlist is still available.');}
@@ -25,7 +29,7 @@ function initialize(data){
 }
 function isSelected(id){return ids.includes(id);}
 function toggle(id){
- if(!index.has(id))return;
+ if(!index.has(id)&&!ids.includes(id))return;
  if(ids.includes(id))ids=ids.filter(x=>x!==id);
  else if(ids.length<maxWatches)ids.push(id);
  else{notify('Your shortlist has six watches. Remove one to add another.');return;}
@@ -36,9 +40,9 @@ function refreshSelection(){
  document.querySelectorAll('[data-compare]').forEach(b=>{const on=ids.includes(b.dataset.compare);b.textContent=on?'✓ Shortlisted':'+ Compare';b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));});
  const count=$('#compare-count');if(count)count.textContent=ids.length||'';
  const matchCount=$('#compare-matches .results-info span:last-child');if(matchCount)matchCount.textContent=`Shortlist ${ids.length} / ${maxWatches}`;
- const tray=$('#compare-tray');if(tray){tray.hidden=!ids.length;tray.innerHTML=`<span><strong>${ids.length} / ${maxWatches}</strong> watches shortlisted</span><button class="button primary" data-open-compare>Compare watches →</button><button class="text-button" data-clear-shortlist>Clear</button>`;tray.querySelector('[data-open-compare]').onclick=()=>{if($('#comparison-table'))$('.comparison-panel').scrollIntoView({block:'start'});else callbacks.navigate?.('compare');};tray.querySelector('[data-clear-shortlist]').onclick=clear;}
+ const tray=$('#compare-tray');if(tray){tray.hidden=!ids.length;tray.classList.toggle('expanded',trayExpanded);tray.innerHTML=`<button class="shortlist-count" data-toggle-shortlist aria-expanded="${trayExpanded}" aria-label="Show shortlisted watches"><strong>${ids.length} / ${maxWatches}</strong> watches shortlisted</button><div class="shortlist-previews">${ids.map(id=>{const r=index.get(id);return `<div class="shortlist-mini"><button data-tray-record="${escape(id)}" title="${escape(r?.brand+' '+r?.reference_number)}">${escape(r?.reference_number||id)}</button><button data-tray-remove="${escape(id)}" aria-label="Remove ${escape(r?.reference_number||id)} from comparison">×</button></div>`;}).join('')}</div><button class="button primary" data-open-compare>Compare watches →</button><button class="text-button" data-clear-shortlist>Clear</button>`;tray.querySelector('[data-open-compare]').onclick=()=>{if($('#comparison-table'))$('.comparison-panel').scrollIntoView({block:'start'});else callbacks.navigate?.('compare');};tray.querySelector('[data-clear-shortlist]').onclick=clear;tray.querySelector('[data-toggle-shortlist]').onclick=()=>{trayExpanded=!trayExpanded;refreshSelection();};tray.querySelectorAll('[data-tray-remove]').forEach(b=>b.onclick=()=>toggle(b.dataset.trayRemove));tray.querySelectorAll('[data-tray-record]').forEach(b=>b.onclick=()=>callbacks.openRecord?.(b.dataset.trayRecord));}
 }
-function selectionButton(r){return `<button class="compare-toggle ${isSelected(r.id)?'selected':''}" data-compare="${escape(r.id)}" aria-pressed="${isSelected(r.id)}" aria-label="Compare ${escape(r.brand+' '+r.specific_model+' '+r.reference_number)}">${isSelected(r.id)?'✓ Shortlisted':'+ Compare'}</button>`;}
+function selectionButton(r){if(!index.has(r.id)){index.set(r.id,r);rows.push(r);}return `<button class="compare-toggle ${isSelected(r.id)?'selected':''}" data-compare="${escape(r.id)}" aria-pressed="${isSelected(r.id)}" aria-label="Compare ${escape(r.brand+' '+r.specific_model+' '+r.reference_number)}">${isSelected(r.id)?'✓ Shortlisted':'+ Compare'}</button>`;}
 function bindSelection(){document.querySelectorAll('[data-compare]').forEach(b=>b.onclick=()=>toggle(b.dataset.compare));refreshSelection();}
 function clear(){ids=[];persist();notify('Shortlist cleared.');if($('#comparison-table'))renderTable();}
 function fieldOptions(value){return [...new Set(fields.map(f=>f.group))].map(group=>`<optgroup label="${escape(group)}">${fields.filter(f=>f.group===group&&!['url'].includes(f.type)).map(f=>`<option value="${escape(f.id)}" ${f.id===value?'selected':''}>${escape(f.label)}${f.unit?' ('+escape(f.unit)+')':''}</option>`).join('')}</optgroup>`).join('');}
@@ -57,12 +61,15 @@ function renderRules(){
  document.querySelectorAll('[data-remove-rule]').forEach(b=>b.onclick=()=>{rules.splice(Number(b.dataset.removeRule),1);persist();renderRules();renderMatches();renderTable();});
 }
 function matches(){const q=query.trim().toLocaleLowerCase();return rows.map(r=>({r,...M.match(r,rules,fields,unknown)})).filter(x=>x.pass&&(!q||[x.r.brand,x.r.specific_model,x.r.reference_number,x.r.case_material,x.r.dial_color,x.r.caliber,x.r.features].some(v=>String(v||'').toLocaleLowerCase().includes(q)))).sort((a,b)=>a.unknown-b.unknown);}
-function renderMatches(){
+let matchSequence=0;
+async function renderMatches(){
  const errors=rules.map((r,i)=>{const e=M.validateRule(r,fields.find(f=>f.id===r.field));return e?`Requirement ${i+1}: ${e}`:'';}).filter(Boolean);
  $('#requirement-errors').innerHTML=errors.map(e=>`<p class="requirement-error">${escape(e)}</p>`).join('');
- const matched=errors.length?[]:matches();
- $('#compare-matches').innerHTML=`<div class="results-info"><span>${matched.length.toLocaleString('en-US')} matching watches</span><span>Shortlist ${ids.length} / ${maxWatches}</span></div>${matched.length?`<div class="match-list">${matched.slice(0,shown).map(({r,unknown:n})=>`<article class="match-watch"><button class="match-name" data-match-record="${escape(r.id)}"><small>${escape(r.brand)} · ${escape(r.reference_number)}</small><strong>${escape(r.specific_model)}</strong><span>${escape(M.display(r,fields.find(f=>f.id==='diameter')))} · ${escape(r.movement_family||'Movement not recorded')}${n?' · '+n+' unrecorded requirement'+(n===1?'':'s'):''}</span></button>${selectionButton(r)}</article>`).join('')}</div>${matched.length>shown?'<button class="button show-more" id="more-matches">Show more matches</button>':''}`:`<div class="empty compare-empty"><h3>${errors.length?'Finish setting your requirements':'No matching watches'}</h3><p>${errors.length?'Each active requirement needs a value.':'Try broader requirements or include watches with unrecorded values.'}</p></div>`}`;
- $('#more-matches')?.addEventListener('click',()=>{shown+=12;renderMatches();});
+ const ticket=++matchSequence;let total;let matched=errors.length?[]:matches();
+ if(partial&&!errors.length){try{const result=await root.AtlasFinder.getComparison({query,rules,unknown,shown});if(ticket!==matchSequence||!$('#compare-matches'))return;upsert(result.watches);total=result.total;matched=result.watches.map(r=>({r,...M.match(r,rules,fields,unknown)}));}catch{if(ticket!==matchSequence||!$('#compare-matches'))return;$('#compare-matches').innerHTML='<p class="compare-note">The matching catalog could not load. Open Watch Finder or retry your requirements.</p>';return;}}
+ total??=matched.length;
+ $('#compare-matches').innerHTML=`<div class="results-info"><span>${total.toLocaleString('en-US')} matching watches</span><span>Shortlist ${ids.length} / ${maxWatches}</span></div>${matched.length?`<div class="match-list">${matched.slice(0,shown).map(({r,unknown:n})=>`<article class="match-watch"><button class="match-name" data-match-record="${escape(r.id)}"><small>${escape(r.brand)} · ${escape(r.reference_number)}</small><strong>${escape(r.specific_model)}</strong><span>${escape(M.display(r,fields.find(f=>f.id==='diameter')))} · ${escape(r.movement_family||'Movement not recorded')}${n?' · '+n+' unrecorded requirement'+(n===1?'':'s'):''}</span></button>${selectionButton(r)}</article>`).join('')}</div>${total>shown&&shown<96?'<button class="button show-more" id="more-matches">Show more matches</button>':''}`:`<div class="empty compare-empty"><h3>${errors.length?'Finish setting your requirements':'No matching watches'}</h3><p>${errors.length?'Each active requirement needs a value.':'Try broader requirements or include watches with unrecorded values.'}</p></div>`}`;
+ $('#more-matches')?.addEventListener('click',()=>{shown=Math.min(96,shown+12);renderMatches();});
  document.querySelectorAll('[data-match-record]').forEach(b=>b.onclick=()=>callbacks.openRecord?.(b.dataset.matchRecord));bindSelection();
 }
 function activeFields(watches){return fields.filter(f=>selected.includes(f.id)&&(!differences||M.difference(watches,f))&&(!hideEmpty||watches.some(r=>M.known(f.read(r)))));}
@@ -101,6 +108,8 @@ function bind(nextCallbacks){
  $('#clear-comparison').onclick=()=>{clear();renderMatches();};$('#share-comparison').onclick=share;$('#export-comparison').onclick=exportCsv;
  refreshSelection();
 }
+function upsert(records,{replace=false}={}){if(partial&&replace){rows=rows.filter(r=>ids.includes(r.id));index=new Map(rows.map(r=>[r.id,r]));}for(const r of records){if(!r?.is_watch)continue;index.set(r.id,{...(index.get(r.id)||{}),...r});const i=rows.findIndex(x=>x.id===r.id);if(i>=0)rows[i]=index.get(r.id);else rows.push(r);}if(partial&&rows.length>110){const keep=new Set([...rows.slice(-104).map(r=>r.id),...ids]);rows=rows.filter(r=>keep.has(r.id));index=new Map(rows.map(r=>[r.id,r]));}fields=M.allFields([...rows,...fields.filter(f=>f.id.startsWith('extra:')).map(f=>({extra_specs:[{label:f.label,value:''}]}))]);refreshSelection();}
+function selectedIds(){return [...ids];}
 function configure(nextCallbacks){callbacks=nextCallbacks;}
-root.AtlasWorkspace={initialize,configure,render,bind,bindSelection,selectionButton,refreshSelection,isSelected,toggle};
+root.AtlasWorkspace={upsert,selectedIds,notify,initialize,configure,render,bind,bindSelection,selectionButton,refreshSelection,isSelected,toggle};
 })(globalThis);
