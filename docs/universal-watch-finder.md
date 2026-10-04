@@ -58,9 +58,9 @@ Zero-result responses keep the active requirements and calculate up to three sug
 
 ## Production activation
 
-The implementation is locally functional. It has **not** been deployed and the existing price worker has no Finder database binding yet. Publishing the static files alone will leave Finder requests unavailable.
+The production backend was activated on 5 October 2026. `watch-atlas-catalog` contains 3,636 watches and 3,636 FTS entries, and the existing worker is deployed with `WATCHES_D1` at version `d43be1c4-f828-407f-bab5-f4011139e4b1`. Metadata, exact reference, Pepsi nickname, descriptive constraints, autocomplete, empty-state alternatives and website CORS checks passed against the live API. The existing price endpoint's CORS preflight also passed without a paid lookup. The frontend awaits publication from `main`.
 
-Use the existing Cloudflare account and price worker. Create a dedicated D1 catalog database, then add its actual returned ID to `backend/wrangler.toml`:
+The binding is saved in `backend/wrangler.toml`. For a fresh installation or replacement staging catalog, use the existing Cloudflare account and price worker. Create a dedicated D1 catalog database, then add its actual returned ID to the config:
 
 ```toml
 [[d1_databases]]

@@ -16,5 +16,9 @@ name = "SEARCH_BUDGET"
 namespace_id = "31002"
 simple = { limit = 30, period = 60 }
 
-# Universal Watch Finder uses WATCHES_D1. Add a d1_databases binding with the
-# actual database ID before activating it; see docs/universal-watch-finder.md.
+# Universal Watch Finder catalog.
+[[d1_databases]]
+binding = "WATCHES_D1"
+database_name = "watch-atlas-catalog"
+database_id = "df288d98-0322-4b66-985a-d4e564e17fba"
+migrations_dir = "migrations"

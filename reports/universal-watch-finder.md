@@ -88,7 +88,9 @@ Full measurements are in [finder-benchmark.json](finder-benchmark.json). These a
 
 ## Activation and remaining limits
 
-**The production site and worker have not been deployed.** The existing worker still needs a real `WATCHES_D1` binding and an imported catalog snapshot before the frontend is published. `.finder/catalog.sql` and `.finder/catalog.sqlite` are generated locally and ignored by Git. The largest current import statement is approximately 22 KB.
+**Production backend activated on 5 October 2026; frontend publication pending.** The catalog was imported into `watch-atlas-catalog` (`df288d98-0322-4b66-985a-d4e564e17fba`) and the existing worker deployed with `WATCHES_D1`, version `d43be1c4-f828-407f-bab5-f4011139e4b1`. Remote counts confirm 3,636 watch records and 3,636 FTS entries. `.finder/catalog.sql` and `.finder/catalog.sqlite` are generated locally and ignored by Git. The largest current import statement is approximately 22 KB.
+
+Live API checks from the website origin passed: metadata 3,636; `Rolex 126710BLRO` 2; `Rolex Pepsi` 4; `automatic GMT under $15,000` 52; the six-constraint titanium query 0 with the same 40/2/1 relaxations; and relevant JLC Reverso autocomplete collections/references. All responses returned HTTP 200 and the expected website CORS header. Observed request times ranged from 380 to 1,228 ms including network latency; this small functional check is not a load test. The existing price API preflight returned HTTP 204 without initiating a paid lookup.
 
 Follow [the architecture and activation guide](../docs/universal-watch-finder.md). Import a new staging database, verify representative queries, bind/deploy the existing worker, then publish the frontend. Preserve the old database for rollback. Existing price credentials, origin restrictions and rate limits remain in place.
 

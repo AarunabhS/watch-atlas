@@ -20,7 +20,7 @@ The landing page uses original watchmaker image links in an animated showcase wi
 
 The indexed Watch Finder adds global autocomplete, entity/reference lookup and natural-language constraints, normalized attribute filters, shareable URLs, mobile Apply/Clear controls, measured empty-state suggestions and a persistent six-watch comparison tray. Finder and comparison candidate queries run on SQLite / Cloudflare D1 and return bounded result pages; currencies, unknown values and source provenance stay explicit.
 
-Run `node tools/build-finder-catalog.mjs` and `ATLAS_PREVIEW_PORT=8791 node tools/preview-price-backend.mjs` with Node 24+, then open `http://127.0.0.1:8791/#finder`. The implementation is locally functional; the production worker still requires its `WATCHES_D1` binding and import before the new frontend can be published. See [architecture, data limits and activation](docs/universal-watch-finder.md).
+Run `node tools/build-finder-catalog.mjs` and `ATLAS_PREVIEW_PORT=8791 node tools/preview-price-backend.mjs` with Node 24+, then open `http://127.0.0.1:8791/#finder`. The production catalog has been imported into D1 and the existing worker deployed with `WATCHES_D1`; live API checks passed on 5 October 2026. The frontend awaits publication from `main`. See [architecture, data limits and activation](docs/universal-watch-finder.md).
 
 ## Preview locally
 
