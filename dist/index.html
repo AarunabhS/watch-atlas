@@ -7,6 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312141a'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23dbc28e' stroke-width='2'/%3E%3Cpath d='M16 9v7l5 3' fill='none' stroke='%23dbc28e' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="refinement.css">
+  <link rel="stylesheet" href="comparison.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -16,6 +17,7 @@
   <nav aria-label="Main navigation">
     <button data-view="overview" class="nav-button active"><span aria-hidden="true">◫</span> Overview</button>
     <button data-view="catalog" class="nav-button"><span aria-hidden="true">▦</span> Watch catalog <small id="nav-count"></small></button>
+    <button data-view="compare" class="nav-button"><span aria-hidden="true">⇄</span> Compare watches <small id="compare-count"></small></button>
     <button data-view="insights" class="nav-button"><span aria-hidden="true">◌</span> Collection insights</button>
     <button data-view="method" class="nav-button"><span aria-hidden="true">⌁</span> The process</button>
     <button data-view="quality" class="nav-button"><span aria-hidden="true">◉</span> Data coverage</button>
@@ -30,7 +32,13 @@
   <footer><span>WATCH ATLAS <span class="muted">/ A project by Arunabho Kanti Som</span></span><span>Archive + October 2026 catalogs</span></footer>
 </div>
 <dialog id="detail" aria-labelledby="detail-title"><button class="close" aria-label="Close watch details">×</button><div id="detail-content"></div></dialog>
+<div id="compare-tray" class="compare-tray" aria-label="Watch shortlist" hidden></div>
+<div id="atlas-status" class="atlas-status" role="status" aria-live="polite"></div>
+<script src="config.js" defer></script>
 <script src="catalog-model.js" defer></script>
+<script src="comparison-model.js" defer></script>
+<script src="price-lookup.js" defer></script>
+<script src="comparison.js" defer></script>
 <script src="insights.js" defer></script>
 <script src="app.js" defer></script>
 </body></html>

@@ -30,8 +30,12 @@ jobs:
           node --check dist/app.js
           node --check dist/insights.js
           node --check dist/catalog-model.js
+          node --check dist/comparison-model.js
+          node --check dist/comparison.js
+          node --check dist/price-lookup.js
+          node --check backend/price-service.mjs
           node tools/validate_catalog.cjs
-          node --test tests/catalog.test.cjs
+          node --test tests/*.test.cjs tests/*.test.mjs
       - name: Upload dashboard
         uses: actions/upload-pages-artifact@v4
         with:

@@ -8,6 +8,10 @@ The site contains a watch showcase, searchable catalog, collection insights, pro
 
 Collection insights compare six inferred watch segments, average wristwatch diameter, decorative gemstone mentions, movement families, and distinct calibers. Watchmaker selection updates all comparisons; chart selections open matching catalog references. Filters combine watchmaker, segment, movement family, gemstone detail, watch type and text search.
 
+**Compare watches** lets users combine up to twelve personal requirements and shortlist up to six references. The current catalog offers 88 selectable comparison parameters, including price, dimensions, materials, movements, functions, dials, straps and additional published details. Comparisons support difference-only rows, saved shortlists, shareable links and CSV export. Budget filters keep currencies separate and missing values remain unknown.
+
+Unavailable prices offer an exact-reference Google search. The optional Serper + Cloudflare backend enables inline reported-price results with source links, source dates, currency labels, caching and short request deadlines. It is prepared for account connection; the public configuration contains no key and no backend URL yet. See [setup and comparison documentation](docs/price-search-and-comparison.md).
+
 The landing page uses original watchmaker image links in an animated showcase with pause and manual selection controls. The layout adapts to mobile screens and respects reduced-motion preferences. Technical archive information is confined to Project archive.
 
 ## Preview locally
@@ -20,6 +24,9 @@ Run `python3 -m http.server 4173 --directory dist` and open `http://localhost:41
 - `dist/styles.css` and `dist/refinement.css`: visual design, responsive layouts and animation.
 - `dist/app.js`: navigation, search, filters, detail panels, archive, and optional browser catalog tool.
 - `dist/insights.js`: interactive comparisons and methodology notes.
+- `dist/comparison-model.js`, `dist/comparison.js`, `dist/comparison.css`: personal requirements, shortlists and side-by-side comparison.
+- `dist/price-lookup.js`, `dist/config.js`: reported-price controls and public backend configuration.
+- `backend/`: optional Cloudflare price-search worker, catalog identity allowlist and deployment configuration.
 - `dist/data.json`: normalized catalog and archive inventory derived from the preserved project files.
 
 The catalog uses seven archived source tables and six completed official catalog imports. Repeated rows are coalesced by brand and reference, falling back to the source URL when a reference is absent. Later H. Moser source tables enrich earlier ones. Empty fields remain empty. Coverage measures the presence of ten core fields; it does not certify accuracy. Original price currencies and source provenance are retained.
@@ -40,7 +47,7 @@ The application runs in the browser, with its prepared catalog bundled in `dist/
 
 ## GitHub Pages
 
-GitHub Pages publishes the `dist` directory through `.github/workflows/pages.yml`. Every push to `main` deploys the current dashboard; the workflow can also be run manually from GitHub Actions. No build step, package installation, API keys or backend are required.
+GitHub Pages publishes the `dist` directory through `.github/workflows/pages.yml`. Every push to `main` deploys the current dashboard; the workflow can also be run manually from GitHub Actions. The catalog and comparison workspace require no build step, package installation, API key or backend. Inline reported-price searches use the separately deployed worker and server-side key described above.
 
 The public site includes the prepared catalog and archive inventory. The original notebooks, spreadsheets and private project documents are not bundled in this repository.
 

@@ -9,3 +9,8 @@ __pycache__/
 node_modules/
 scraping_runs/
 permissions.local.json
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+.wrangler/
