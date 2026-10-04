@@ -15,3 +15,10 @@ simple = { limit = 6, period = 60 }
 name = "SEARCH_BUDGET"
 namespace_id = "31002"
 simple = { limit = 30, period = 60 }
+
+# Universal Watch Finder catalog.
+[[d1_databases]]
+binding = "WATCHES_D1"
+database_name = "watch-atlas-catalog"
+database_id = "df288d98-0322-4b66-985a-d4e564e17fba"
+migrations_dir = "migrations"

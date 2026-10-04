@@ -12,7 +12,15 @@ Collection insights compare six inferred watch segments, average wristwatch diam
 
 Unavailable prices offer an exact-reference Google search. The optional Serper + Cloudflare backend enables inline reported-price results with source links, source dates, currency labels, caching and short request deadlines. The existing price worker is connected; its key stays on the server. See [setup and comparison documentation](docs/price-search-and-comparison.md).
 
+Watch details include an **Enlarge image** viewer with full-screen zoom, mouse-wheel and pinch gestures, drag-to-pan, double-tap zoom, keyboard controls, and a fit reset. Verified larger Breguet, Omega, IWC and Jaeger-LeCoultre images load only when the viewer opens; other watches use their existing source images. Image files remain outside the repository. See [image viewer details](docs/image-viewer.md).
+
 The landing page uses original watchmaker image links in an animated showcase with pause and manual selection controls. The layout adapts to mobile screens and respects reduced-motion preferences. Technical archive information is confined to Project archive.
+
+## Universal Watch Search and Watch Finder
+
+The indexed Watch Finder adds global autocomplete, entity/reference lookup and natural-language constraints, normalized attribute filters, shareable URLs, mobile Apply/Clear controls, measured empty-state suggestions and a persistent six-watch comparison tray. Finder and comparison candidate queries run on SQLite / Cloudflare D1 and return bounded result pages; currencies, unknown values and source provenance stay explicit.
+
+Run `node tools/build-finder-catalog.mjs` and `ATLAS_PREVIEW_PORT=8791 node tools/preview-price-backend.mjs` with Node 24+, then open `http://127.0.0.1:8791/#finder`. The production catalog has been imported into D1 and the existing worker deployed with `WATCHES_D1`; live API checks passed on 5 October 2026. The frontend awaits publication from `main`. See [architecture, data limits and activation](docs/universal-watch-finder.md).
 
 ## Preview locally
 
@@ -43,11 +51,11 @@ Gemstone mentions describe decorative stones in the captured specifications and 
 
 Some source descriptions differ from their model labels. The comparisons describe the stored snapshot without independently verifying every specification or claiming complete current catalog coverage.
 
-The application runs in the browser, with its prepared catalog bundled in `dist/data.json`. Watchmaker images and web fonts require an internet connection. Local preview is available through the server command above.
+The existing archive views can load the prepared catalog in `dist/data.json`; Finder and comparison use a small bootstrap and the indexed API. Watchmaker images and web fonts require an internet connection. Local preview is available through the server command above.
 
 ## GitHub Pages
 
-GitHub Pages publishes the `dist` directory through `.github/workflows/pages.yml`. Every push to `main` deploys the current dashboard; the workflow can also be run manually from GitHub Actions. The catalog and comparison workspace require no build step, package installation, API key or backend. Inline reported-price searches use the separately deployed worker and server-side key described above.
+GitHub Pages publishes the `dist` directory through `.github/workflows/pages.yml`. Every push to `main` deploys the current dashboard; the workflow can also be run manually from GitHub Actions. The workflow uses Node 24 to build and validate the Finder projection and bootstrap. Activate the catalog database and existing worker before publishing the Finder frontend. Legacy catalog and static pages remain available independently; Finder and comparison candidate queries require the catalog API. Inline reported-price searches use the same worker and its separate server-side key described above.
 
 The public site includes the prepared catalog and archive inventory. The original notebooks, spreadsheets and private project documents are not bundled in this repository.
 

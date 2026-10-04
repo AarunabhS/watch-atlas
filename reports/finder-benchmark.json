@@ -1,0 +1,30 @@
+{
+  "kind": "Synthetic local SQLite benchmark (in-memory; no network or D1 latency)",
+  "rows": 100000,
+  "results": [
+    {
+      "name": "catalog page",
+      "matches": 100000,
+      "medianMs": 91,
+      "maxMs": 100
+    },
+    {
+      "name": "reference prefix",
+      "matches": 33340,
+      "medianMs": 224.7,
+      "maxMs": 229.9
+    },
+    {
+      "name": "combined filters",
+      "matches": 25005,
+      "medianMs": 183.7,
+      "maxMs": 196.1
+    },
+    {
+      "name": "numeric sorting",
+      "matches": 100000,
+      "medianMs": 83.6,
+      "maxMs": 102.1
+    }
+  ]
+}
