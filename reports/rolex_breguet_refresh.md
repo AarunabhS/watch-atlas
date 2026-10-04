@@ -32,4 +32,21 @@ Unresolved records remain visibly marked historical/unverified. The 53 unresolve
 - [Collector/import instructions](../docs/rolex_breguet_refresh.md).
 - Ignored source/export/image evidence: scraping_runs/rolex-breguet-refresh-2026-10-05/.
 
-Deployment and live browser verification will be recorded after publication.
+## Publication verified
+
+The refresh is live at [Watch Atlas](https://www.arunabhosom.com/watch-atlas/).
+Catalog commit `e413c5772959354e49ee665778f17aa0d04189e1` passed the
+[GitHub Pages deployment](https://github.com/AarunabhS/watch-atlas/actions/runs/37232968686).
+The public index, catalog JSON, application script, catalog model and stylesheet
+each returned HTTP 200 and matched the validated local bytes. Catalog SHA-256:
+`b6ee623a127710a8ce73e88e9e1fcb4c80f25cd209f5372c91d80893e93cc2ee`.
+
+The live catalog displays 3,636 references, Breguet 266 and Rolex 1,089. Live
+details for new Breguet Marine Chronographe 5527TI/G2/TW0 and refreshed Rolex
+Datejust 36 126234-0051 load their exact selected images and restored technical
+details. Local screenshots are retained with the ignored refresh evidence.
+
+The existing price worker was deployed with 1,792 eligible identities as version
+`06464ef2-4991-429c-ac5c-363ac9fcf7b4`. Its website CORS preflight returned 204.
+Existing bindings and server-side secret were preserved; verification made no
+paid provider searches.

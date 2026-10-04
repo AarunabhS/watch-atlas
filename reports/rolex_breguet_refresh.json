@@ -78539,5 +78539,61 @@
     "javascript_tests": 51,
     "catalog": "passed",
     "idempotence": "byte-for-byte identical"
+  },
+  "deployment": {
+    "platform_url": "https://www.arunabhosom.com/watch-atlas/",
+    "catalog_commit": "e413c5772959354e49ee665778f17aa0d04189e1",
+    "pages_run": "https://github.com/AarunabhS/watch-atlas/actions/runs/37232968686",
+    "pages_conclusion": "success",
+    "public_assets": [
+      {
+        "asset": "index.html",
+        "url": "https://www.arunabhosom.com/watch-atlas/index.html",
+        "http_status": 200,
+        "sha256": "2fed93aa029e123b7917d062d0519a52e4982be4a4c083ac9d3f2d12818098ba",
+        "matches_local": true
+      },
+      {
+        "asset": "data.json",
+        "url": "https://www.arunabhosom.com/watch-atlas/data.json",
+        "http_status": 200,
+        "sha256": "b6ee623a127710a8ce73e88e9e1fcb4c80f25cd209f5372c91d80893e93cc2ee",
+        "matches_local": true
+      },
+      {
+        "asset": "app.js",
+        "url": "https://www.arunabhosom.com/watch-atlas/app.js",
+        "http_status": 200,
+        "sha256": "dbe379f51b058901530879134719a4d57563b1ffff2258d89a1b0dd85d52e0a1",
+        "matches_local": true
+      },
+      {
+        "asset": "catalog-model.js",
+        "url": "https://www.arunabhosom.com/watch-atlas/catalog-model.js",
+        "http_status": 200,
+        "sha256": "7429b55bc84558e39fb358496f31a6ecad451d12aabec3a8bb89993d275cab04",
+        "matches_local": true
+      },
+      {
+        "asset": "styles.css",
+        "url": "https://www.arunabhosom.com/watch-atlas/styles.css",
+        "http_status": 200,
+        "sha256": "c3f89f19eee1b7729b38d7f4638a18a124fcbe6d896b7c88a53eb649eaca76e9",
+        "matches_local": true
+      }
+    ],
+    "price_worker_version": "06464ef2-4991-429c-ac5c-363ac9fcf7b4",
+    "price_worker_preflight": 204,
+    "paid_verification_queries": 0,
+    "browser_checks": [
+      "3,636 references, Breguet 266 and Rolex 1,089",
+      "Breguet Marine Chronographe 5527TI/G2/TW0: selected image loaded, natural width 526",
+      "Rolex Datejust 36 126234-0051: selected image loaded, natural width 1200; case and bracelet materials correctly separated"
+    ],
+    "screenshots": [
+      "scraping_runs/rolex-breguet-refresh-2026-10-05/live-breguet.jpg",
+      "scraping_runs/rolex-breguet-refresh-2026-10-05/live-rolex.jpg"
+    ],
+    "verified_at_utc": "2026-10-04 20:42:23 UTC"
   }
 }

@@ -1,5 +1,35 @@
 # Watch Atlas — Codex handoff
 
+## Latest platform update — 5 October 2026
+
+The authorized Rolex/Breguet refresh is published and verified. The live Atlas
+contains 3,636 watches / 11 makers / 24 pocket watches. Rolex retains 1,089 IDs:
+840 exact current references have verified images and refreshed specifications;
+249 remain visibly historical/unverified. Breguet has 266 watches: 199 verified
+current references (159 added), 198 working images and 67 historical/unverified
+references. All 1,196 existing Rolex/Breguet IDs survive. The 53 unresolved Breguet
+model/reference conflicts have unreliable details withheld. Other makers and the
+73-file archive inventory are preserved.
+
+See `reports/rolex_breguet_refresh.md` and its JSON for per-reference changes,
+source omissions, live asset hashes, deployment and browser evidence. The refresh
+passed 107 Python tests, 51 JavaScript tests, catalog and syntax validation and
+byte-identical repeat import. The public assets match the prepared bytes.
+The existing price worker now allows 1,792 identities; its server-side secret
+and existing access were retained.
+
+Refresh worktree: `/Users/Arunabho/Documents/ChatGPT/Watch Atlas/rolex-breguet-refresh`.
+Preserve its ignored `scraping_runs/rolex-breguet-refresh-2026-10-05/` sources,
+exports, image proofs, starting snapshot and live screenshots. Original audit
+evidence is in the shared `repository/scraping_runs/rolex-breguet-audit-2026-10-04/`.
+The other chat's completed Jacob/Universal collectors remain in the shared local
+repository and were not included in this platform refresh. Do not reset, clean or
+switch that chat's checkout. Follow its local handoff for that separate work.
+
+The older sections below are retained as historical context; this update governs
+the current platform counts and publication status.
+
+
 Updated: 4 October 2026, Asia/Kolkata. Read this before changing anything.
 
 ## 1. Current objective and completion criteria
