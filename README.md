@@ -4,7 +4,7 @@ A responsive watch research portfolio and catalog for Arunabho Kanti Som.
 
 **[Explore the live dashboard](https://www.arunabhosom.com/watch-atlas/)** · [GitHub Pages URL](https://aarunabhs.github.io/watch-atlas/)
 
-The site contains a watch showcase, searchable catalog, collection insights, project process, data coverage, and a searchable inventory of 73 project files. The catalog contains **3,036 watches across nine watchmakers**: 3,013 wristwatches and 23 pocket watches. It combines the 2023–2024 archive with 252 Patek Philippe and 402 Breitling references captured on 2 October 2026, plus 197 Jaeger-LeCoultre and 556 Omega references captured on 3–4 October 2026. Capture dates and source markets appear in watch details.
+The site contains a watch showcase, searchable catalog, collection insights, project process, data coverage, and a searchable inventory of 73 project files. The catalog contains **3,477 watches across eleven watchmakers**: 3,454 wristwatches and 23 pocket watches. It combines the 2023–2024 archive with 252 Patek Philippe and 402 Breitling references captured on 2 October 2026, plus 197 Jaeger-LeCoultre, 556 Omega, 216 Tudor and 225 IWC references captured on 3–4 October 2026. Capture dates and source markets appear in watch details; Tudor uses the India/INR snapshot and IWC the US/USD snapshot.
 
 Collection insights compare six inferred watch segments, average wristwatch diameter, decorative gemstone mentions, movement families, and distinct calibers. Watchmaker selection updates all comparisons; chart selections open matching catalog references. Filters combine watchmaker, segment, movement family, gemstone detail, watch type and text search.
 
@@ -22,7 +22,7 @@ Run `python3 -m http.server 4173 --directory dist` and open `http://localhost:41
 - `dist/insights.js`: interactive comparisons and methodology notes.
 - `dist/data.json`: normalized catalog and archive inventory derived from the preserved project files.
 
-The catalog uses seven archived source tables and four completed official catalog imports. Repeated rows are coalesced by brand and reference, falling back to the source URL when a reference is absent. Later H. Moser source tables enrich earlier ones. Empty fields remain empty. Coverage measures the presence of ten core fields; it does not certify accuracy. Original price currencies and source provenance are retained.
+The catalog uses seven archived source tables and six completed official catalog imports. Repeated rows are coalesced by brand and reference, falling back to the source URL when a reference is absent. Later H. Moser source tables enrich earlier ones. Empty fields remain empty. Coverage measures the presence of ten core fields; it does not certify accuracy. Original price currencies and source provenance are retained.
 
 The preserved archive and original project files were not modified. The dashboard includes file metadata and selected watch data. Raw notebooks and private project documents remain outside the published repository.
 
@@ -30,7 +30,7 @@ The preserved archive and original project files were not modified. The dashboar
 
 The primary segment is inferred from captured model names, collection labels and stated functions. Complications take priority, followed by chronographs, diving, travel and jewellery; remaining models fall under time & date. This is an analytical grouping rather than an official watchmaker taxonomy.
 
-Diameter comparisons use 2,842 single wristwatch diameter measurements. Pocket watches, diagonal measurements, multiple dimensions and missing values are excluded. One 430 mm wall clock remains in the project data but is excluded from the watch catalog and comparisons. Miniature wristwatches with valid measurements remain included.
+Diameter comparisons use 3,282 single wristwatch diameter measurements. Pocket watches, diagonal measurements, multiple dimensions and missing values are excluded. One 430 mm wall clock remains in the project data but is excluded from the watch catalog and comparisons. Miniature wristwatches with valid measurements remain included.
 
 Gemstone mentions describe decorative stones in the captured specifications and descriptions. Sapphire crystals and movement-bearing jewel counts are excluded. A missing mention does not establish that a watch has no gemstones. Movement families use explicit recorded wording; unspecified types stay unspecified. Calibers are normalized and counted separately for each watchmaker.
 
@@ -82,10 +82,12 @@ describes those separate controls and extension points.
 
 ## Import completed catalogs
 
-Run `node tools/import_catalog.cjs patek breitling jlc omega` to import the validated JSONL exports from `scraping_runs/`. This is a separate, repeatable step: reimporting replaces the same source datasets without duplicating references. Archived records and the 73-file inventory remain unchanged. The site retains the shared specifications, additional published technical details, source identities and capture dates. Full source fields and raw cached pages remain in the local research exports.
+Run `node tools/import_catalog.cjs patek breitling jlc omega tudor iwc` to import the validated JSONL exports from `scraping_runs/`. This is a separate, repeatable step: reimporting replaces the same source datasets without duplicating references. Archived records and the 73-file inventory remain unchanged. The site retains the shared specifications, additional published technical details, source identities and capture dates. Full source fields and raw cached pages remain in the local research exports.
 
 Validate before publishing with `node tools/validate_catalog.cjs` and `node --test tests/catalog.test.cjs`.
 
 Jaeger-LeCoultre uses the browser collector in [its instructions](docs/jaeger_lecoultre.md). Its completed capture contains **197 references**, including specialist collections and three watch-identified editorial product pages. See [the run report](reports/jaeger_lecoultre_research.md).
 
 Omega uses the isolated [US collector](tools/capture_omega_us.py) and [instructions](docs/omega_us.md). Its **556 references** reconcile exactly with the US watch finder, including three pocket watches. See [the validated run report](reports/omega_us_capture.md).
+
+Tudor and IWC use the validated [India Tudor capture](reports/tudor_in_capture.md) and [US IWC capture](reports/iwc_us_capture.md). Their 441 references are imported into the same searchable catalog and insights. Grouped USD prices are parsed numerically; the 15 unpriced IWC references and undisclosed specifications remain unspecified.

@@ -9,10 +9,12 @@ const registry=[
  {id:'patek-official-catalog',brand:'Patek Philippe',slug:'patek',label:'Patek Philippe official catalog · 2 October 2026'},
  {id:'breitling-official-catalog',brand:'Breitling',slug:'breitling',label:'Breitling US official catalog · 2 October 2026'},
  {id:'jlc-official-catalog',brand:'Jaeger-LeCoultre',slug:'jlc',label:'Jaeger-LeCoultre US official catalog'},
- {id:'omega-official-catalog',brand:'Omega',slug:'omega',folder:'omega-us-capture',label:'Omega US official catalog'}
+ {id:'omega-official-catalog',brand:'Omega',slug:'omega',folder:'omega-us-capture',label:'Omega US official catalog'},
+ {id:'tudor-official-catalog',brand:'Tudor',slug:'tudor',folder:'tudor-in-capture',label:'Tudor India official catalog'},
+ {id:'iwc-official-catalog',brand:'IWC',slug:'iwc',folder:'iwc-us-capture',label:'IWC US official catalog'}
 ];
 const requested=process.argv.slice(2);
-if(requested.some(x=>!registry.some(d=>d.slug===x)))throw new Error('Unknown catalog; choose patek, breitling, jlc or omega');
+if(requested.some(x=>!registry.some(d=>d.slug===x)))throw new Error('Unknown catalog; choose '+registry.map(d=>d.slug).join(', '));
 const datasets=registry.filter(x=>(requested.length?requested:['patek','breitling']).includes(x.slug));
 const imported=[];
 for(const dataset of datasets){
@@ -22,7 +24,8 @@ for(const dataset of datasets){
  const file=path.join(folder,'exports',dataset.slug+'_watches.jsonl');
  const body=fs.readFileSync(file,'utf8');
  const rows=body.trim().split('\n').map(line=>JSON.parse(line));
- if(rows.length!==manifest.watches_expected||rows.some(r=>r.brand!==dataset.brand))throw new Error('Source catalog count or identity mismatch');
+ if(rows.length!==manifest.watches_expected||rows.length!==manifest.watches_captured||rows.some(r=>r.brand!==dataset.brand||manifest.market&&r.market!==manifest.market))throw new Error('Source catalog count, market or identity mismatch');
+ dataset.market=manifest.market||rows[0].market;
  if(!dataset.label.includes('October'))dataset.label+=' · '+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'}).format(new Date(rows[0].captured_at));
  const normalized=rows.map(row=>model.normalize(row,dataset));
  if(new Set(normalized.map(r=>r.id)).size!==normalized.length)throw new Error('Duplicate source identity');
@@ -30,14 +33,14 @@ for(const dataset of datasets){
  dataset.rows=normalized.length;dataset.file=path.relative(root,file);
  dataset.sha256=crypto.createHash('sha256').update(body).digest('hex');
  dataset.source=manifest.source;dataset.captured_dates=[...new Set(normalized.map(r=>r.captured_date))].sort();dataset.captured_date=dataset.captured_dates[0];dataset.captured_date_range=dataset.captured_dates.length>1?dataset.captured_dates[0]+' to '+dataset.captured_dates.at(-1):dataset.captured_date;
- if(dataset.captured_dates.length>1){dataset.label=dataset.brand+' US official catalog · '+normalized.find(r=>r.captured_date===dataset.captured_dates[0]).captured_label+' to '+normalized.find(r=>r.captured_date===dataset.captured_dates.at(-1)).captured_label;for(const row of normalized)row.sources=[dataset.label];}
+ if(dataset.captured_dates.length>1){dataset.label=dataset.label.split(' · ')[0]+' · '+normalized.find(r=>r.captured_date===dataset.captured_dates[0]).captured_label+' to '+normalized.find(r=>r.captured_date===dataset.captured_dates.at(-1)).captured_label;for(const row of normalized)row.sources=[dataset.label];}
 }
 const ids=new Set(datasets.map(x=>x.id));
 const archive=data.records.filter(r=>!ids.has(r.source_dataset));
 data.records=[...archive,...imported];
 if(new Set(data.records.map(r=>r.id)).size!==data.records.length)throw new Error('Duplicate catalog ID');
 data.catalogImports=[...(data.catalogImports||[]).filter(x=>!ids.has(x.id)),...datasets];
-data.brandOrder=['Jaeger-LeCoultre','Omega','Patek Philippe','Breitling','Audemars Piguet','H. Moser & Cie.','Bulgari','Breguet','Rolex'];
+data.brandOrder=['Jaeger-LeCoultre','Omega','Patek Philippe','Breitling','Tudor','IWC','Audemars Piguet','H. Moser & Cie.','Bulgari','Breguet','Rolex'];
 data.showcaseBrands=data.brandOrder.filter(name=>data.records.some(r=>r.brand===name&&r.is_watch&&r.image_url)).slice(0,3);
 data.snapshotLabel='2023–2024 archive + October 2026 catalogs';
 data.archiveStats=data.archiveStats||{...data.stats};

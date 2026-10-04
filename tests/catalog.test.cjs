@@ -11,3 +11,23 @@ test('imported catalogs preserve complete reference counts and pocket types',()=
 
 test('Jaeger-LeCoultre and Omega imports match the completed exports',()=>{assert.equal(data.records.filter(r=>r.brand==='Jaeger-LeCoultre'&&r.is_watch).length,197);assert.equal(data.records.filter(r=>r.brand==='Omega'&&r.is_watch).length,556);assert.equal(data.records.filter(r=>r.brand==='Omega'&&r.watch_kind==='Pocket watch').length,3);});
 test('missing images remain valid watch references with a catalog fallback',()=>{const row=model.normalize({...source,image_URL:'',brand:'Omega'},dataset);assert.equal(row.image_url,'');assert.equal(row.is_watch,true);});
+test('grouped official prices retain their currency and malformed prices stay unspecified',()=>{const row=model.normalize({...source,price:'6,900',currency:'USD'},dataset);assert.equal(row.price_value,6900);assert.equal(row.currency,'USD');assert.equal(model.normalize({...source,price:'6,90'},dataset).price_value,null);});
+test('new catalog families and selected IWC gemstone features feed the filters',()=>{
+ assert.equal(model.normalize({...source,specific_model:'Black Bay Chrono',features:'Chrono; Date'},dataset).segment,'Chronograph');
+ assert.equal(model.normalize({...source,specific_model:'Aquatimer Automatic',features:''},dataset).segment,'Diving');
+ assert.equal(model.normalize({...source,specific_model:'Pelagos FXD',features:''},dataset).segment,'Diving');
+ const row=model.normalize({...source,brand:'IWC',raw_specifications:{Features:[{label:'Bezel featuring 45 diamonds',value:''},{label:'Sapphire glass',value:''}]}},dataset);assert.deepEqual(row.gemstones,['Diamond']);
+});
+test('Tudor and IWC imports preserve completed references, markets and price omissions',()=>{
+ const tudor=data.records.filter(r=>r.source_dataset==='tudor-official-catalog'),iwc=data.records.filter(r=>r.source_dataset==='iwc-official-catalog');
+ assert.equal(tudor.length,216);assert.equal(iwc.length,225);
+ assert.ok(tudor.every(r=>r.market==='IN'&&r.currency==='INR'&&r.price_value>0));
+ assert.ok(iwc.every(r=>r.market==='US'));
+ assert.equal(iwc.filter(r=>r.price_value!==null).length,210);assert.ok(iwc.filter(r=>r.price_value!==null).every(r=>r.currency==='USD'));
+ assert.equal(iwc.filter(r=>r.price_value===null).length,15);
+ const sparse=iwc.find(r=>r.reference_number==='IW659803');assert.equal(sparse.diameter_mm,null);assert.equal(sparse.power_reserve,'');
+ assert.ok(iwc.find(r=>r.reference_number==='IW328801').extra_specs.some(s=>s.label==='Movement parts'&&s.value==='163'));
+ const smallTudor=tudor.find(r=>r.reference_number==='M91350-0001');assert.equal(smallTudor.between_lugs,'15 mm');assert.equal(smallTudor.lug_to_lug,'');
+ const fxd=tudor.find(r=>r.reference_number==='M25717N-0001');assert.equal(fxd.between_lugs,'22 mm');assert.equal(fxd.lug_to_lug,'52 mm');
+ assert.equal(data.insights.overall.count,3477);assert.equal(data.stats.preparedBrands,11);assert.equal(data.stats.pocketWatches,23);assert.equal(data.inventory.length,73);
+});

@@ -15,8 +15,8 @@ function movementFamily(row){
 function segment(row){
  const selected=[row.specific_model,row.marketing_name,row.features].join(' ');
  if(/perpetual|annual calendar|tourbillon|repeater|sonnerie|moon.?phase|split.?seconds|rattrapante|world time|alarm|retrograde|power reserve (?:display|indicator)/i.test(selected))return 'Complications';
- if(/chronograph|chronographe/i.test(selected))return 'Chronograph';
- if(/superocean|submariner|sea.?dweller|diving|diver/i.test(selected+' '+row.parent_model))return 'Diving';
+ if(/chronograph|chronographe|\bchrono\b/i.test(selected))return 'Chronograph';
+ if(/superocean|submariner|sea.?dweller|aquatimer|pelagos|diving|diver/i.test(selected+' '+row.parent_model))return 'Diving';
  if(/\bgmt\b|dual time|second time zone|travel time/i.test(selected))return 'Travel & GMT';
  if(/joaillerie|jewell?ery|jewell?er|jewelry|serpenti|divas|allegra/i.test(selected))return 'Jewellery';
  return 'Time & date';
@@ -25,6 +25,7 @@ function stoneDetails(source,row){
  const evidenceFields=['dial_color','numerals','case_material','bezel_material','bracelet_material','clasp_type'];
  const values=evidenceFields.map(key=>[key,text(row[key])]);
  for(const [key,value] of Object.entries(source.raw_specifications||{})){if(/gem|diamond|stone|setting/i.test(key))values.push([key,text(value)]);}
+ for(const feature of source.brand==='IWC'&&Array.isArray(source.raw_specifications?.Features)?source.raw_specifications.Features:[]){if(/gem|diamond|stone|setting/i.test(feature.label+' '+feature.value))values.push(['Features',text(feature.label+' '+feature.value)]);}
  if(source.gem_setting)values.push(['gem_setting',text(source.gem_setting)]);
  const patterns={Diamond:/\bdiamonds?\b|\bdiamants?\b/i,Ruby:/\brub(?:y|ies)\b(?![ -]?red)/i,Emerald:/\bemeralds?\b(?![ -]?green)/i,Sapphire:/\bsapphires?\b(?![ -]?(?:blue|crystal|glass))/i,Amethyst:/\bamethysts?\b/i,Tourmaline:/\btourmalines?\b/i,Rubellite:/\brubellites?\b/i,Peridot:/\bperidots?\b/i,Spinel:/\bspinels?\b/i,Tsavorite:/\btsavorites?\b/i};
  const stones=[],evidence=[];
@@ -48,7 +49,8 @@ function normalize(source,dataset){
  const captured=dateParts(source.captured_at);row.captured_date=captured.date;row.captured_label=captured.label;
  row.market=source.market;row.language=source.language;row.source_kind='Official catalog';
  row.watch_kind=source.subtype==='Pocketwatch'||/pocket/i.test(source.type||'')?'Pocket watch':'Wristwatch';row.is_watch=true;
- row.price_value=/^\d+(?:\.\d+)?$/.test(row.price)&&Number(row.price)>0?Number(row.price):null;
+ const numericPrice=/^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(row.price)?Number(row.price.replace(/,/g,'')):null;
+ row.price_value=numericPrice!==null&&numericPrice>0?numericPrice:null;
  row.price_status=source.price_status||'';row.price_tax_label=source.price_tax_label||'';
  const diameter=/^(\d+(?:[.,]\d+)?)\s*mm$/i.exec(row.diameter);
  row.diameter_mm=diameter?Number(diameter[1].replace(',','.')):null;
@@ -62,6 +64,10 @@ function normalize(source,dataset){
  row.coverage=Math.round(coreFields.filter(key=>row[key]).length/coreFields.length*100);
  const extras={crown:'Crown',hands:'Hands',hands_reverse:'Reverse hands',case_decoration:'Case decoration',movement_diameter:'Movement diameter',movement_thickness:'Movement thickness',number_of_parts:'Movement parts',number_of_bridges:'Movement bridges',balance_wheel:'Balance wheel',balance_spring:'Balance spring',winding_rotor:'Winding rotor',quality_seal:'Quality seal',gem_setting:'Gem setting',additional_strap:'Additional strap',bracelet_adjustment:'Bracelet adjustment',pocket_chain_or_stand:'Pocket chain or stand',pocket_bow:'Pocket bow',pocket_crown:'Pocket crown',bezel:'Bezel',strapType:'Strap type',lug:'Strap dimensions',buckleMaterial:'Clasp material',buckleSize:'Clasp size'};
  row.extra_specs=Object.entries(extras).filter(([key])=>text(source[key])).map(([key,label])=>({label,value:text(source[key])}));
+ if(source.strap_description)row.extra_specs.push({label:'Strap description',value:text(source.strap_description)});
+ if(source.price_kind||source.price_note)row.extra_specs.push({label:'Price basis',value:text(source.price_kind||source.price_note)});
+ if(source.brand==='Tudor')for(const label of ['Five-year Guarantee','Winding Crown']){const value=text(source.raw_specifications?.[label]);if(value)row.extra_specs.push({label,value});}
+ if(source.brand==='IWC')for(const [section,label] of [['Case','Crown'],['Movement','Components']]){const value=text(source.raw_specifications?.[section]?.find(x=>x.label===label)?.value);if(value)row.extra_specs.push({label:label==='Components'?'Movement parts':label,value});}
  if(source.headWeight)row.extra_specs.push({label:'Watch-head weight',value:text(source.headWeight)+' g'});
  if(source.warrantyDuration)row.extra_specs.push({label:'Manufacturer warranty',value:text(source.warrantyDuration)+' years'});
  if(typeof source.limited_edition==='boolean')row.extra_specs.push({label:'Limited edition',value:source.limited_edition?'Yes':'No'});

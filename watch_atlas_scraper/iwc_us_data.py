@@ -158,5 +158,6 @@ def product(body, url, item, meta):
     r.set('description', editorial or intro or short, 'Selected product editorial or purchase-panel introduction')
     r.data.update(raw_specifications=raw, source_product_fields={'structured_product': selected, 'structured_data': structured, 'catalogue': item, 'editorial_paragraphs': editorial, 'gallery_images': list(dict.fromkeys(x for x in gallery if x.startswith('https://')))},
                   variant_urls=list(dict.fromkeys(u for u in doc.xpath('//main//a/@href') if official(u) and u != url)),
-                  source_representation=meta['representation'], price_note='US suggested retail price; VAT excluded where stated')
+                  source_representation=meta['representation'], product_detail_parsed=True,
+                  price_note='US suggested retail price; VAT excluded where stated')
     return r.finalize()
