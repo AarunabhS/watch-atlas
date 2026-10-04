@@ -12,7 +12,7 @@ Collection insights compare six inferred watch segments, average wristwatch diam
 
 Unavailable prices offer an exact-reference Google search. The optional Serper + Cloudflare backend enables inline reported-price results with source links, source dates, currency labels, caching and short request deadlines. The existing price worker is connected; its key stays on the server. See [setup and comparison documentation](docs/price-search-and-comparison.md).
 
-Watch details include an **Enlarge image** viewer with full-screen zoom, mouse-wheel and pinch gestures, drag-to-pan, double-tap zoom, keyboard controls, and a fit reset. Verified larger Breguet images load only when the viewer opens; other watches use their existing source images. Image files remain outside the repository. See [image viewer details](docs/image-viewer.md).
+Watch details include an **Enlarge image** viewer with full-screen zoom, mouse-wheel and pinch gestures, drag-to-pan, double-tap zoom, keyboard controls, and a fit reset. Verified larger Breguet, Omega, IWC and Jaeger-LeCoultre images load only when the viewer opens; other watches use their existing source images. Image files remain outside the repository. See [image viewer details](docs/image-viewer.md).
 
 The landing page uses original watchmaker image links in an animated showcase with pause and manual selection controls. The layout adapts to mobile screens and respects reduced-motion preferences. Technical archive information is confined to Project archive.
 
